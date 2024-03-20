@@ -1,33 +1,36 @@
-# Use the official Apache2 image as the database server
-FROM apache2:latest
+#Dockerfile
+FROM php:8.2-apache
 
-# Use the official PHP image as the base image
-FROM php:latest
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Install required PHP extensions
-RUN docker-php-ext-install mysqli pdo_mysql
-
-# Set the working directory to /var/www/html
-WORKDIR /var/www/html
-
-# Copy the PHP application files to the container
-COPY . /var/www/html
-
-# Expose port 80 for web traffic
 EXPOSE 80
+WORKDIR /dm-web
 
-# Use the official MySQL image as the database server
-FROM mysql:latest
+# git, unzip & zip are for composer
+RUN apt-get update -qq && \
+    apt-get install -qy \
+    git \
+    gnupg \
+    unzip \
+    zip && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the root password for MySQL
-ENV MYSQL_ROOT_PASSWORD=Emilien030702
+# PHP Extensions
+RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
+COPY conf/php.ini /usr/local/etc/php/conf.d/app.ini
 
-# Create a new database
-ENV MYSQL_DATABASE=programming_languages
+# Apache
+COPY errors /errors
+COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
+# Move dm-web content to app
+COPY /dm-web/index.php /app/index.php
+COPY /dm-web/src /app/src
+COPY /dm-web/dump /app/dump
+COPY /dm-web/skin /app/skin
+COPY /dm-web/upload /app/upload
+RUN ls /app
 
-# Copy the SQL script to initialize the database
-COPY init.sql /docker-entrypoint-initdb.d/
-
-# Expose port 3306 for MySQL connections
-EXPOSE 3306
-
+RUN a2enmod rewrite remoteip && \
+    a2enconf z-app
