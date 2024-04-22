@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: language_service_configmap
-data:
-  MYSQL_DATABASE: programming_languages
-  DATABASE_URL: ""

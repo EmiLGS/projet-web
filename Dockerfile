@@ -1,36 +1,31 @@
-#Dockerfile
+# This file is only used for the application to be run in a container.
+# SQL container is needed to be used. 
+# A docker file for SQL is available in the mysql folder.
+
+
+# Utilisation de l'image PHP officielle
 FROM php:8.2-apache
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+# Installer les dépendances nécessaires
+RUN apt-get update && \
+    apt-get install -y \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+        libzip-dev \
+        unzip \
+        git \
+        && docker-php-ext-configure gd --with-freetype --with-jpeg \
+        && docker-php-ext-install gd pdo pdo_mysql zip
 
+# Copier les fichiers de l'application dans le conteneur
+COPY . /var/www/html/
+
+# Définir le répertoire de travail
+WORKDIR /var/www/html
+
+# Exposer le port Apache
 EXPOSE 80
-WORKDIR /dm-web
 
-# git, unzip & zip are for composer
-RUN apt-get update -qq && \
-    apt-get install -qy \
-    git \
-    gnupg \
-    unzip \
-    zip && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# PHP Extensions
-RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
-COPY conf/php.ini /usr/local/etc/php/conf.d/app.ini
-
-# Apache
-COPY errors /errors
-COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-# Move dm-web content to app
-COPY /dm-web/index.php /app/index.php
-COPY /dm-web/src /app/src
-COPY /dm-web/dump /app/dump
-COPY /dm-web/skin /app/skin
-COPY /dm-web/upload /app/upload
-RUN ls /app
-
-RUN a2enmod rewrite remoteip && \
-    a2enconf z-app
+# Commande pour démarrer Apache
+CMD ["apache2-foreground"]
