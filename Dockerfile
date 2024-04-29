@@ -1,31 +1,20 @@
-# This file is only used for the application to be run in a container.
-# SQL container is needed to be used. 
-# A docker file for SQL is available in the mysql folder.
-
-
-# Utilisation de l'image PHP officielle
+# Utiliser une image PHP
 FROM php:8.2-apache
+
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /var/www/html
+
+# Copier le code source de l'application dans le conteneur
+COPY dm-web/. /var/www/html
 
 # Installer les dépendances nécessaires
 RUN apt-get update && \
-    apt-get install -y \
-        libpng-dev \
-        libjpeg-dev \
-        libfreetype6-dev \
-        libzip-dev \
-        unzip \
-        git \
-        && docker-php-ext-configure gd --with-freetype --with-jpeg \
-        && docker-php-ext-install gd pdo pdo_mysql zip
+    apt-get install -y libpng-dev libjpeg-dev && \
+    docker-php-ext-configure gd --with-jpeg && \
+    docker-php-ext-install gd mysqli pdo pdo_mysql
 
-# Copier les fichiers de l'application dans le conteneur
-COPY . /var/www/html/
-
-# Définir le répertoire de travail
-WORKDIR /var/www/html
-
-# Exposer le port Apache
+# Exposer le port 80
 EXPOSE 80
 
-# Commande pour démarrer Apache
+# Point d'entrée pour démarrer Apache
 CMD ["apache2-foreground"]

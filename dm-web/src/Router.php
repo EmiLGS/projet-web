@@ -120,7 +120,7 @@ class Router {
 
 
     public function getIndexURL(){
-        return '/project/dm-web/langages.php';
+        return '/index.php';
     }
 
 

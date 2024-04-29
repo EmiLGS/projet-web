@@ -15,9 +15,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/project/dm-web/skin/dom.css">
-        <link href="/project/dm-web/skin/bootstrap.min.css" type="text/css" rel="stylesheet">
-        <script src="/project/dm-web/skin/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/skin/dom.css">
+        <link href="/skin/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <script src="/skin/bootstrap.bundle.min.js"></script>
         <title>Languages de programmation</title>
         <!--
             <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
