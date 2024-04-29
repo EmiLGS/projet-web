@@ -7,9 +7,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/project/dm-web/skin/dom.css">
-        <link href="/project/dm-web/skin/bootstrap.min.css" type="text/css" rel="stylesheet">
-        <script src="/project/dm-web/skin/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/skin/dom.css">
+        <link href="/skin/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <script src="/skin/bootstrap.bundle.min.js"></script>
         <title>Languages de programmations</title>
     </head>
     <body>
@@ -28,7 +28,7 @@
             if (key_exists(1,$request) && $request[1] === "list") {
                 if (!empty($this->programmingLanguages)) {
                     foreach ($this->programmingLanguages as  $key => $programmingLanguage) {
-                        echo('<li class="list-group-item-md">' . '<a class="link-list" href="' . $this->router->getProgrammingLanguageURL($key) . '"><h3>' . $programmingLanguage->getName() . '</h3></a> <img class="logo-list" src="/project/dm-web/upload/' . $programmingLanguage->getLogo() . '"/> </li>');
+                        echo('<li class="list-group-item-md">' . '<a class="link-list" href="' . $this->router->getProgrammingLanguageURL($key) . '"><h3>' . $programmingLanguage->getName() . '</h3></a> <img class="logo-list" src="/upload/' . $programmingLanguage->getLogo() . '"/> </li>');
                     }
                 }
                 else {

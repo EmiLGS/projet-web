@@ -1,33 +1,20 @@
-# Use the official Apache2 image as the database server
-FROM apache2:latest
+# Utiliser une image PHP
+FROM php:8.2-apache
 
-# Use the official PHP image as the base image
-FROM php:latest
-
-# Install required PHP extensions
-RUN docker-php-ext-install mysqli pdo_mysql
-
-# Set the working directory to /var/www/html
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /var/www/html
 
-# Copy the PHP application files to the container
-COPY . /var/www/html
+# Copier le code source de l'application dans le conteneur
+COPY dm-web/. /var/www/html
 
-# Expose port 80 for web traffic
+# Installer les dépendances nécessaires
+RUN apt-get update && \
+    apt-get install -y libpng-dev libjpeg-dev && \
+    docker-php-ext-configure gd --with-jpeg && \
+    docker-php-ext-install gd mysqli pdo pdo_mysql
+
+# Exposer le port 80
 EXPOSE 80
 
-# Use the official MySQL image as the database server
-FROM mysql:latest
-
-# Set the root password for MySQL
-ENV MYSQL_ROOT_PASSWORD=Emilien030702
-
-# Create a new database
-ENV MYSQL_DATABASE=programming_languages
-
-# Copy the SQL script to initialize the database
-COPY init.sql /docker-entrypoint-initdb.d/
-
-# Expose port 3306 for MySQL connections
-EXPOSE 3306
-
+# Point d'entrée pour démarrer Apache
+CMD ["apache2-foreground"]

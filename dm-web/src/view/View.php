@@ -3,6 +3,11 @@ class View{
     private $squelette;
     private $router;
     private $feedback;
+    private $content;
+    private $programmingLanguages;
+    private $name;
+    private $creator;
+    private $creationDate;
     private $menu;
     private $seeableCRUDButton=false;
     // Attribute from programming language
@@ -52,7 +57,7 @@ class View{
     public function makeProgrammingLanguagePage($programmingLanguage)
     {
         $this->title = $programmingLanguage->getName();
-        $this->content = '<img class="logo" src="/project/dm-web/upload/' . $programmingLanguage->getLogo() . '"/> <br/>';
+        $this->content = '<img class="logo" src="/upload/' . $programmingLanguage->getLogo() . '"/> <br/>';
         $this->content .= $programmingLanguage->getName() . " est un langage de programmation développé par " . $programmingLanguage->getCreator() . ", sorti en " . $programmingLanguage->getCreationDate();
         $this->squelette = "ViewSquelette.php";
         // Boolean, used to show modify and delete action button
