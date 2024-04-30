@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: programming-languages-database-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: programming-languages-database
+  template:
+    metadata:
+      labels:
+        app: programming-languages-database
+    spec:
+      containers:
+      - name: programming-languages-database-container
+        image: emilienlgs/programming-languages-database:latest
+        ports:
+        - containerPort: 3306
+        env:
+        - name: root
+          value: "root"
+        - name: programming-languages
+          value: "programming_languages"

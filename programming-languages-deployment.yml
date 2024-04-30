@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: programming-languages-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: programming-languages
+  template:
+    metadata:
+      labels:
+        app: programming-languages
+    spec:
+      containers:
+      - name: programming-languages-container
+        image: emilienlgs/programming-languages:latest
+        ports:
+        - containerPort: 8080
