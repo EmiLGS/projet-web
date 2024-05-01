@@ -10,6 +10,12 @@ Voici les points réalisé dans ce projet :
 * Création de deux services sur des containers différents (PHP,SQL).
 * Les 2 Googles LABS réalisé en cours.
 
+## Nos réalisations GOOGLE CLOUD SKILLS
+
+![image](https://github.com/EmiLGS/projet-web/assets/116065137/54240721-f8f8-4598-a109-ad7585f3ceeb)
+
+![théophile google labs](https://github.com/EmiLGS/projet-web/assets/116065137/30eb7334-cf98-4000-b264-d1ed911d235d)
+
 ## Gestion de L'application PHP
 
 Lors de la récupération du projet Github lancer d'abord le dockerfile de la base de donnée et y récuperer l'adresse ip. Ensuite rendez-vous dans le fichier index.php afin de modifier le fichier et y changer l'adresse IP hôte de la Base de donnée SQL. Le lien se fera automatiquement.
