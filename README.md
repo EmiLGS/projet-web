@@ -50,6 +50,11 @@ docker run -d --name programming-languages -p 8080:80 emilienlgs/programming-lan
 
 [DockerHub App](https://hub.docker.com/repository/docker/emilienlgs/programming-languages/general)
 
+Si le build des dockerfile vient du projet l'ip défini dans le fichier index.php devrait suffir sinon si le build provient de docker, il est possible que vous devriez vous rendre dans le fichier index.php de l'app pour définir l'adresse ip de la base de donnée.
+
+voici à quoi ressemble le projet:
+![page](https://github.com/EmiLGS/projet-web/assets/116065137/4934a05d-44d0-4c0a-a27e-2addbab2bb72)
+
 ## Gestion de Kubernetes
 
 ### Les bases
@@ -58,11 +63,15 @@ Dans cette partie nous présenterons les bases, que ce soit pour les commandes, 
 
 Téléchargement de minikube pour gérer et manager les pods. Minikube permet de crée un dashboard qui informera l'état des pods.
 
-```minkube start```
+```bash
+minkube start
+```
 
 Cette commande vous ménera à un dashboard pour pouvoir gérer vos pods redemrarrer voir le status du pod etc :
 
-```minikube dashboard```
+```bash
+minikube dashboard
+```
 
 ![image de mon dashboard](image-rendu/image.png)
 
@@ -71,27 +80,37 @@ Cette commande vous ménera à un dashboard pour pouvoir gérer vos pods redemra
 
 Obtenir l'adresse IP du pod :
 
-```kubectl describe pods```
+```bash
+kubectl describe pods
+```
 
 Pour accéder au terminal du pod nous utilisons la commande où podname correspond au nom du pod obtenu avec la commande précédente ou ```kubectl get pods```:
 
-```kubectl exec -it podname -- /bin/bash```
+```bash
+kubectl exec -it podname -- /bin/bash
+```
 
 ## Utilisation des pods
 
 D'abord, créer les pods depuis une image Docker Hub ou depuis une image local exemple avec mes containers, dans mon cas depuis dockerhub :
 
-```kubectl create deployment programming-languages --image=emilienlgs/programming-languages:latest```
-```kubectl create deployment programming-languages-database --image=emilienlgs/programming-languages-database:latest```
+```bash
+kubectl create deployment programming-languages --image=emilienlgs/programming-languages:v1
+kubectl create deployment programming-languages-database --image=emilienlgs/programming-languages-database:v1
+```
 
 
 Pour exposer les ports en ligne pour utiliser par exemple, ma webapp :
 
-```kubectl expose deployment programming-languages --type=NodePort --port=8080```
+```bash
+kubectl expose deployment programming-languages --type=NodePort --port=8080
+```
 
 Puis pour obtenir le lien du pod :
 
-```minikube service programming-languages --url```
+```
+minikube service programming-languages --url
+```
 
 Voici le rendu de la commande :
 
@@ -99,7 +118,9 @@ Voici le rendu de la commande :
 
 Il est aussi possible de gérer la scalabilité d'une app pour s'assurer qu'il existe toujours une app backup. Pour cela il suffit d'utiliser cette commande :
 
-```kubectl scale --replicas=2 deployment/programming-languages```
+```bash
+kubectl scale --replicas=2 deployment/programming-languages
+```
 
 On peut voir que 2 services programming-laguages tournent en ce moment.
 
