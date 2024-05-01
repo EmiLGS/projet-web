@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: programming-languages
+spec:
+  rules:
+    - host: programming-languages.local
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: programming-languages
+              port:
+                number: 80

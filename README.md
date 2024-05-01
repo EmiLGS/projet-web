@@ -85,3 +85,19 @@ On peut voir que 2 service programming-laguages tourne en ce moment.
 ![scaling](image-rendu/image-2.png)
 
 ## Utilisation des fichiers .yml
+
+Afin de faciliter la création des pods et leurs déployements. Vous appliquez la commande ```kubectl apply -f ./kube/``` ou alors spécifier pour l'ensemble des fichiers ```kubectl apply -f <nom_du_fichier.yml>```.
+
+Après avoir entré cette commande vérifier que les services,deployements,ingress soient crées.
+Les pods :
+![les pods](image-readme/pod.png)
+Les deployements :
+![deployments](image-readme/deployments.png)
+Les services :
+![services](image-readme/services.png)
+L'ingress
+![ingress](image-readme/ingress.png)
+
+Maintenant modifions le fichier /etc/hosts (Linux) ou C:\windows\system32\drivers\etc\hosts (Windows) en ajoutant l'adresse ip de l'ingress et l'hôte dans mon cas ```192.168.49.2 programming-languages.local```.
+
+Si tous va bien dans votre navigateur en tapant dans la barre de recherhce programming-languages.local vous aurez accès à mon app. Il faudra ensuite accéder à mon application depuis la commande ```kubectl exec -it -- bash``` et modifier le fichier index.php en mettnt l'ip pour se connecter à la bse de donnée.
