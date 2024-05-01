@@ -31,8 +31,12 @@ docker run -d --name programming-languages-database -p 3306:3306 emilienlgs/prog
 
 Lancement de Apache et PHP dans le dossier projet-web:
 
-```docker build -t emilienlgs/programming-languages:latest .``` ou depuis docker hub ```docker pull emilienlgs/programming-languages:latest```
-```docker run -d --name programming-languages -p 8080:80 emilienlgs/programming-languages:latest```
+```bash
+docker build -t emilienlgs/programming-languages:latest . 
+# ou depuis docker hub
+docker pull emilienlgs/programming-languages:latest
+docker run -d --name programming-languages -p 8080:80 emilienlgs/programming-languages:latest
+```
 
 [DockerHub App](https://hub.docker.com/repository/docker/emilienlgs/programming-languages/general)
 
