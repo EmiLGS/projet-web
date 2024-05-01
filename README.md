@@ -132,13 +132,21 @@ Afin de faciliter la création des pods et leurs déployements, vous appliquez l
 
 Après avoir entré cette commande, vérifier que: les services,deployements,ingress soient crées.
 Les pods :
+
 ![les pods](image-readme/pod.png)
+
 Les deployements :
+
 ![deployments](image-readme/deployments.png)
+
 Les services :
+
 ![services](image-readme/services.png)
+
 L'ingress
+
 ![ingress](image-readme/ingress.png)
+
 
 Maintenant modifions le fichier /etc/hosts (Linux) ou C:\windows\system32\drivers\etc\hosts (Windows) en ajoutant l'adresse ip de l'ingress et l'hôte dans mon cas ```192.168.49.2 programming-languages.local```.
 
