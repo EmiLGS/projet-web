@@ -1,18 +1,18 @@
 # Projet-web
 
-Ce projet a été réalisé par LANGLOIS Emilien et Théophile Taffoureau. Ce projet a pour but de d'apprendre l'utilisation des technologies liés au métieer de DevOps et DevSecOps à travers Docker, Kubernetes, Minikube, service mesh et bien d'autres.
+Ce projet a été réalisé par LANGLOIS Emilien et TAFFOUREAU Théophile. Ce projet a pour but d'apprendre l'utilisation des technologies liées au métier de DevOps et DevSecOps à travers Docker, Kubernetes, Minikube, service mesh et bien d'autres.
 
 Voici les points réalisé dans ce projet :
 
 * Création des Dockerfile.
-* Création des fichiers utiles à un déploiements Kubernetes.
+* Création des fichiers utiles à un déploiement Kubernetes.
 * Un service mesh.
 * Création de deux services sur des containers différents (PHP,SQL).
 * Les 2 Googles LABS réalisé en cours.
 
 ## Gestion de L'application PHP
 
-Lors de la récupération du projet Github lancer d'abord le dockerfile de la base de donnée et y récuperer l'adresse ip. Ensuite rendez-vous dans le fichier index.php afin de modifier le fichier et y changer l'adresse IP hôte de la Base de donnée SQL. Le lien se fera automatiquement ensuite.
+Lors de la récupération du projet Github lancer d'abord le dockerfile de la base de donnée et y récuperer l'adresse ip. Ensuite rendez-vous dans le fichier index.php afin de modifier le fichier et y changer l'adresse IP hôte de la Base de donnée SQL. Le lien se fera automatiquement.
 
 ## Gestion de DOCKER
 
@@ -52,7 +52,7 @@ Obtenir l'adresse IP du pod :
 
 ```kubectl describe pods```
 
-Pour accéder au terminal du pod on utilise la commande où podname correspond au nom du pod obtenu avec la commande précédente ou ```kubectl get pods```:
+Pour accéder au terminal du pod nous utilisons la commande où podname correspond au nom du pod obtenu avec la commande précédente ou ```kubectl get pods```:
 
 ```kubectl exec -it podname -- /bin/bash```
 
@@ -76,19 +76,19 @@ Voici le rendu de la commande :
 
 ![Rendu de la commande](image-rendu/image-1.png)
 
-Il est aussi possible de gérer la scalabilité d'une app pour s'assurer qu'il existe toujours une app backup existe pour ça il suffit d'utiliser cette commande :
+Il est aussi possible de gérer la scalabilité d'une app pour s'assurer qu'il existe toujours une app backup. Pour cela il suffit d'utiliser cette commande :
 
 ```kubectl scale --replicas=2 deployment/programming-languages```
 
-On peut voir que 2 service programming-laguages tourne en ce moment.
+On peut voir que 2 services programming-laguages tournent en ce moment.
 
 ![scaling](image-rendu/image-2.png)
 
 ## Utilisation des fichiers .yml
 
-Afin de faciliter la création des pods et leurs déployements. Vous appliquez la commande ```kubectl apply -f ./kube/``` ou alors spécifier pour l'ensemble des fichiers ```kubectl apply -f <nom_du_fichier.yml>```.
+Afin de faciliter la création des pods et leurs déployements, vous appliquez la commande ```kubectl apply -f ./kube/``` ou alors spécifier pour l'ensemble des fichiers ```kubectl apply -f <nom_du_fichier.yml>```.
 
-Après avoir entré cette commande vérifier que les services,deployements,ingress soient crées.
+Après avoir entré cette commande, vérifier que: les services,deployements,ingress soient crées.
 Les pods :
 ![les pods](image-readme/pod.png)
 Les deployements :
@@ -100,4 +100,4 @@ L'ingress
 
 Maintenant modifions le fichier /etc/hosts (Linux) ou C:\windows\system32\drivers\etc\hosts (Windows) en ajoutant l'adresse ip de l'ingress et l'hôte dans mon cas ```192.168.49.2 programming-languages.local```.
 
-Si tous va bien dans votre navigateur en tapant dans la barre de recherhce programming-languages.local vous aurez accès à mon app. Il faudra ensuite accéder à mon application depuis la commande ```kubectl exec -it -- bash``` et modifier le fichier index.php en mettnt l'ip pour se connecter à la bse de donnée.
+Si tous va bien dans votre navigateur en tapant dans la barre de recherhce programming-languages.local, vous aurez accès à mon app. Il faudra ensuite accéder à mon application depuis la commande ```kubectl exec -it -- bash``` et modifier le fichier index.php en mettant l'ip pour se connecter à la base de donnée.
