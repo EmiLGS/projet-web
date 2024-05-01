@@ -18,12 +18,16 @@ Lors de la récupération du projet Github lancer d'abord le dockerfile de la ba
 
 Tout d'abord aller dans /projet-web/mysql et lancer les commandes suivantes pour lancer la base de donnée :
 ```bash 
-docker build -t emilienlgs/programming-languages-database:latest .
+docker build -t programming-languages-database .
 ``` 
 ou depuis docker hub
- 
+
 ```bash
-docker pull emilienlgs/programming-languages-database:latest
+docker pull emilienlgs/programming-languages-database:v1
+```
+puis
+
+```bash
 docker run -d --name programming-languages-database -p 3306:3306 emilienlgs/programming-languages-database:latest
 ```
 
@@ -32,9 +36,15 @@ docker run -d --name programming-languages-database -p 3306:3306 emilienlgs/prog
 Lancement de Apache et PHP dans le dossier projet-web:
 
 ```bash
-docker build -t emilienlgs/programming-languages:latest . 
-# ou depuis docker hub
-docker pull emilienlgs/programming-languages:latest
+docker build -t programming-languages .
+```
+ou depuis docker hub
+```bash
+docker pull emilienlgs/programming-languages:v1
+```
+puis
+
+```bash
 docker run -d --name programming-languages -p 8080:80 emilienlgs/programming-languages:latest
 ```
 
