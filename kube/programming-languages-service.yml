@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: programming-languages
+spec:
+  selector:
+    app: programming-languages
+  ports:
+    - port: 80
+      targetPort: 8080
+  
+  type: NodePort
