@@ -17,8 +17,15 @@ Lors de la récupération du projet Github lancer d'abord le dockerfile de la ba
 ## Gestion de DOCKER
 
 Tout d'abord aller dans /projet-web/mysql et lancer les commandes suivantes pour lancer la base de donnée :
-```docker build -t emilienlgs/programming-languages-database:latest .``` ou depuis docker hub ```docker pull emilienlgs/programming-languages-database:latest```
-```docker run -d --name programming-languages-database -p 3306:3306 emilienlgs/programming-languages-database:latest```
+```bash 
+docker build -t emilienlgs/programming-languages-database:latest .
+``` 
+ou depuis docker hub
+ 
+```bash
+docker pull emilienlgs/programming-languages-database:latest
+docker run -d --name programming-languages-database -p 3306:3306 emilienlgs/programming-languages-database:latest
+```
 
 [DockerHub Database](https://hub.docker.com/repository/docker/emilienlgs/programming-languages-database/general)
 
